@@ -2,13 +2,15 @@
 
 GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -n1)
 
-if echo "$GPU_NAME" | grep -qi "B200"; then
+if echo "$GPU_NAME" | grep -qi "B300"; then
+    MODEL_PATH="nvidia/Kimi-K2.5-NVFP4"
+elif echo "$GPU_NAME" | grep -qi "B200"; then
     MODEL_PATH="nvidia/Kimi-K2.5-NVFP4"
 elif echo "$GPU_NAME" | grep -qi "H200"; then
     MODEL_PATH="moonshotai/Kimi-K2.5"
 else
     echo "Error: Unsupported GPU detected: $GPU_NAME"
-    echo "This script supports H200 and B200 GPUs only."
+    echo "This script supports H200, B200, and B300 GPUs only."
     exit 1
 fi
 
