@@ -15,6 +15,11 @@ else
     exit 1
 fi
 
+EXTRA_ARGS=""
+if echo "$GPU_NAME" | grep -qiE "B200|B300"; then
+    EXTRA_ARGS="--speculative-draft-attention-backend trtllm_mha"
+fi
+
 echo "Detected GPU: $GPU_NAME"
 echo "Using model: $MODEL_PATH"
 
@@ -27,7 +32,7 @@ SGLANG_ENABLE_SPEC_V2=1 python -m sglang.launch_server \
     --speculative-eagle-topk 1 \
     --speculative-num-draft-tokens 4 \
     --speculative-draft-model-path lightseekorg/kimi-k2.5-eagle3 \
-    --speculative-draft-attention-backend trtllm_mha \
+    $EXTRA_ARGS \
     --reasoning-parser kimi_k2 \
     --tool-call-parser kimi_k2 \
     --trust-remote-code \
