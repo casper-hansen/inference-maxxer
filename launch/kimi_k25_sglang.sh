@@ -17,7 +17,10 @@ fi
 
 EXTRA_ARGS=""
 if echo "$GPU_NAME" | grep -qiE "B200|B300"; then
-    EXTRA_ARGS="--speculative-draft-attention-backend trtllm_mha"
+    EXTRA_ARGS="\
+        --kv-cache-dtype fp8_e4m3 \
+        --speculative-draft-attention-backend trtllm_mha \
+    "
 fi
 
 echo "Detected GPU: $GPU_NAME"
@@ -27,7 +30,6 @@ SGLANG_ENABLE_SPEC_V2=1 python -m sglang.launch_server \
     --model-path "$MODEL_PATH" \
     --tp 8 \
     --speculative-algorithm=EAGLE3 \
-    --kv-cache-dtype fp8_e4m3 \
     --speculative-num-steps 3 \
     --speculative-eagle-topk 1 \
     --speculative-num-draft-tokens 4 \
