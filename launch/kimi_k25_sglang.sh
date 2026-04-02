@@ -1,4 +1,5 @@
 #!/bin/bash
+# uv pip install sglang --pre --upgrade
 
 GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -n1)
 
