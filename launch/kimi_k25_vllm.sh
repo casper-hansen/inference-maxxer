@@ -25,13 +25,14 @@ fi
 echo "Detected GPU: $GPU_NAME"
 echo "Using model: $MODEL_PATH"
 
-vllm serve "$MODEL_PATH" \
+VLLM_LOG_STATS_INTERVAL=1 vllm serve "$MODEL_PATH" \
     --tensor-parallel-size 8 \
     --speculative-config '{"model": "lightseekorg/kimi-k2.5-eagle3", "method": "eagle3", "num_speculative_tokens": 3}' \
     --mm-encoder-tp-mode data \
     --compilation_config.pass_config.fuse_allreduce_rms true \
     --reasoning-parser kimi_k2 \
-    --tool-call-parser kimi_k2 \
+    --tool-call-parser kimi_k2_unlimited \
+    --tool-parser-plugin kimi_k2_tool_parser_unlimited.py \
     --enable-auto-tool-choice \
     --trust-remote-code \
     $EXTRA_ARGS \
