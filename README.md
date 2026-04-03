@@ -16,6 +16,19 @@ Settings: Long streaming, reasoning, tool calling requests. At batch size 1, we 
 | 2 | 111.73 | 163.09 | 191.33 |
 | 1 | 154.48 | 275.27 | 402.08 |
 
+## vLLM Kimi K2.5 8x B200
+
+| Active Reqs | Min tok/s/req | Avg tok/s/req | Max tok/s/req |
+|:-----------:|--------------:|--------------:|--------------:|
+| 8 | 145.91 | 179.58 | 202.57 |
+| 7 | 149.29 | 177.97 | 208.31 |
+| 6 | 145.93 | 179.88 | 220.03 |
+| 5 | 159.70 | 161.44 | 163.18 |
+| 4 | 185.00 | 195.96 | 206.93 |
+| 3 | 148.40 | 186.04 | 231.10 |
+| 2 | 162.80 | 180.39 | 234.55 |
+| 1 | 186.60 | 272.40 | 376.40 |
+
 ## SGLang Kimi K2.5 8x H200
 
 | Active Reqs | Min tok/s/req | Avg tok/s/req | Max tok/s/req |
